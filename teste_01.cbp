@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="teste_01" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/teste_01" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/teste_01" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="bcabecalho.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcabecalho.h" />
+		<Unit filename="bregistro.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bregistro.h" />
+		<Unit filename="cabecalho.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cabecalho.h" />
+		<Unit filename="comandos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="comandos.h" />
+		<Unit filename="funcoesFornecidas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="funcoesFornecidas.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="registro.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="registro.h" />
+		<Unit filename="test_cases (1)/arq_entradas/binario1.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario10.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario2.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario3.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario4.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario5.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario6.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario7.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario8.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/binario9.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/indiceDino10.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/indiceDino4.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/indiceDino5.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/indiceDino6.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/indiceDino7.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/indiceDino8.bin" />
+		<Unit filename="test_cases (1)/arq_entradas/indiceDino9.bin" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
