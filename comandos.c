@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -9,8 +10,8 @@
 
  #define PAGINA_TAMANHO 1600
 
-FILE* abertura_arqBin(char *nome, char *tipo)
-{
+FILE* abertura_arqBin(FILE *arquivo, char *tipo)
+//{
     FILE *arquivo = fopen(nome,tipo);
     if (arquivo == NULL) {
         printf("Falha no processamento do arquivo.\n");
@@ -284,71 +285,31 @@ int INSERT_INDICE(char *binario, char *indice)
     fclose(arquivo_indice);
     return 0;
 }
-long encontra_data(FILE* arquivo, long chave){
-int RRNagora = CabecalhoArvore.noRaiz;
-int quant_nos =0;
-long chave_agora =0;
-long res =-1;
 
-while (1)
+void SEARCH_INDICE(char *nomeArq, char *nomeArqArvore)
 {
-    if (RRNagora == -1)
-    {
-        return -1;
+    char *campo, *chave;
+    NoArvore no;
+    Nopos resultado;
+    RedDados reg;
+    FILE *arquivo;
+
+    if(verificar_cabecalho(CabecalhoArvore* bcabecalho_readbin(arquivo))<0)
+        return-1;
+    //verifica cabecalho e le o cabecalho da arvore se for menor q 0 ent retorna -1
+
+    campo = calloc(10, sizeof(char))
+    chave = calloc (160, sizeof(char));
+
+    scanf("%s",campo);
+    scan_quote_string(chave);
+
+    if(strcmp(campo,"nome",4) != 0){
+                printf("A arvore esta indexada de acordo com o campo nome. Nao com: %s\n", campo);
+                return -1;
     }
 
-    fseek(arquivo, (RRNagora +1) * TAMPAGE + sizeof*char), SEEK_SET);
-
-    fread(&quant_nos, sizeof(int), 1 , arquivo);
-
-    //pula o rrn do registro,
-    fseek(arquivo, sizeof(int), 1, arquivo);
-
-    for (int i =0. i < quant_nos; i++)
-    {
-            fread(chave_agora, sizeof(long), 1, arquivo);
-
-            if (chave == chave_agora)
-            {
-
-                fread(&res, sizeof(long). 1 .arquivo);
-
-                return res;
-            }
-
-        if (chave < chave_agora)
-        {
-            fseek(arquivo, -(sizeof(long)+sizeof(int)),SEEK_CURL);
-            fread(&RRNagora,sizeof(int),1 , arquivo);
-
-            break;
-        }
-        else
-        {
-            if (i== quant_nos-1)
-            {
-                fseek(arquivo, sizeof(long), SEEK_CURL);
-                fread(&RRNagora,sizeof(int),1,arquivo);
-                break;
-            }
-
-            fseek(arquivo. sizeof(long)+sizeof(int), SEEK_CUR);
-        }
-    }
-
-}
-}
-void SEARCH_INDICE(char* enderecodados, char enderecoarvre, char* infosearch)
-{
-
-    FILE* arquivoarvre =  abrearqarvre (enderecoarvre);
-
-    if(arquivoarvre==NULL)
-    {
-        return;
-    }
-
-    long posicao = procura_dado(arquivoarvre, conversor_nome(nomeDino));
+    resultado = buscaarvore(nomeArqarvore, conversor_nome(chave));
 }
 
 

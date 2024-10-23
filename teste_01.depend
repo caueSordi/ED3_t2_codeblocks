@@ -7,11 +7,15 @@
 	<stdlib.h>
 	<stdbool.h>
 
-1729545661 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/bregistro.c
-	"bregistro.h"
+1729638704 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/bregistro.c
 	<stdio.h>
 	<stdlib.h>
-	<stdbool.h>
+	<math.h>
+	"bcabecalho.h"
+	"bregistro.h"
+	"registro.h"
+	"cabecalho.h"
+	"funcoesFornecidas.h"
 
 1729604933 /home/cauer/code/ed3/teste_codeblocks/teste_01/bregistro.h
 	<stdio.h>
@@ -29,14 +33,14 @@
 	<stdlib.h>
 	<stdbool.h>
 
-1729600622 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/comandos.c
+1729638824 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/comandos.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
-	"registro.h"
-	"cabecalho.h"
 	"bcabecalho.h"
 	"bregistro.h"
+	"registro.h"
+	"cabecalho.h"
 	"funcoesFornecidas.h"
 
 1729545702 /home/cauer/code/ed3/teste_codeblocks/teste_01/registro.h
@@ -57,16 +61,15 @@
 	<string.h>
 	<ctype.h>
 
-1729604971 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/main.c
+1729638860 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/main.c
 	<stdio.h>
 	<stdlib.h>
-	<string.h>
-	"registro.h"
-	"cabecalho.h"
+	<math.h>
 	"bcabecalho.h"
 	"bregistro.h"
+	"registro.h"
+	"cabecalho.h"
 	"funcoesFornecidas.h"
-	"comandos.h"
 
 1729545683 /home/cauer/code/ed3/teste_codeblocks/teste_01/comandos.h
 	"registro.h"

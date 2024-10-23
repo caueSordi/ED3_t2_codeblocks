@@ -1,5 +1,5 @@
 #ifndef CCOMANDOS_H
-    #define COMANDOS_H
+#define COMANDOS_H
 
 #include "registro.h"
 #include "cabecalho.h"
