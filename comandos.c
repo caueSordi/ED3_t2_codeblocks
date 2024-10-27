@@ -184,6 +184,70 @@ int SELECT_WHERE(char *nomearquivo, char *campo, int quant) {
 
     fclose(arquivo_binario); // Fecha o arquivo binário
     return 0;
+
+    ///////////////////////////////////// insercao////////////////////////
+
+int inserir_registro_02(char *arquivo_binario, Registro registro) {
+       int rrn, topo,removidos;
+    FILE *arquivo;
+    Cabecalho *cabecalho;
+
+    // Abre o arquivo em modo leitura e escrita binária
+    arquivo = fopen(arquivo_binario, "rb+");
+    if (arquivo == NULL) {
+        printf("Erro na abertura de arquivo\n");
+        return -1;
+    }
+
+    // Lê o cabeçalho do arquivo e verifica consistência
+    cabecalho = cabecalho_readbin(arquivo);
+    if (cabecalho == NULL || cabecalho->status == '0') {
+        printf("Erro: Arquivo inconsistente\n");
+        fclose(arquivo);  // Fecha o arquivo para evitar vazamento de recursos
+        return -1;
+    }
+
+    // Atribui valores dos campos do cabeçalho
+    topo = cabecalho->topo;
+    rrn = cabecalho->proxRRN;
+    removidos = cabecalho->nroRegRem;
+
+    cabecalho->status = '0';
+    cabecalho_writebin(arquivo, cabecalho);
+
+    if(topo == -1){
+        rrn++;
+        fseek(arquivo,0,SEEK_END);
+
+    }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 //-------------------------------------------------------------------------------------------------------------------------------------
 //                                             COAMANDOS - Arvore - B
@@ -308,30 +372,33 @@ int INSERT_INDICE(char *binario, char *indice)
 
 
 
-void INSERT_REGISTRO_ARVR(char *binario,char *indice){
+void INSERT_REGISTRO_ARVR(char *binario,char *indice)
+{
 
     int n, i, retorno;
     int rrn;
-    NoPos resultado;
+
     char *chave;
 
 
-    CabecalhoArvore cabecalho = bcabecalho_inicializa();
+   CabecalhoArvore *bcabecalho = bcabecalho_inicializa();
 
    FILE *arquivo_binario = fopen(binario, "rb");
     if (arquivo_binario == NULL) {
         printf("Falha ao abrir o arquivo \n");
         return 0;
     }
-    bcabecalho_readbin(binario)
+    Cabecalho *cabecalho = cabecalho_readbin(arquivo_binario);
 
-    if(Cabecalho.status == 1) return -1;
     scanf("%d", &n);
 
-    for(i=0;i<n;i++)
+
+    for(i=0;i<n;i++) //quantos registros serao adicionados
     {
 
-        Registro registro -
+        Registro *registro = leitura();
+        rrn = inserir_registro_02( arquivo_binario, Registro registro)
+
     }
 
 
