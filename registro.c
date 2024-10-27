@@ -2,7 +2,7 @@
 #include "cabecalho.h"
 
 
-Registro *registro_readbin(FILE* entrada) { 
+Registro *registro_readbin(FILE* entrada) {
       Registro *registro = cria_registro();
 
     if (!fread(&registro->removido, sizeof(char), 1, entrada)) {
@@ -32,7 +32,7 @@ Registro *registro_readbin(FILE* entrada) {
     strcpy (registro->alimento , strsep(&linha, "#"));
 
     //free(linha);
-    
+
     return registro;
 }
 
@@ -148,10 +148,10 @@ Registro *registro_readcsv(FILE *csv) {
     else{
         registro->populacao = atoi(populacao);
     }
-    
+
     // Tipo
     strcpy(registro->tipo,strsep(&linha_copy, ","));
-    
+
 
     // Velocidade
     char *velocidade = strsep(&linha_copy, ",");
@@ -161,7 +161,7 @@ Registro *registro_readcsv(FILE *csv) {
     else{
         registro->velocidade = atoi(velocidade);
     }
-    
+
     // Unidade de medida
     char *unidade = strsep(&linha_copy, ",");
     if (strlen(unidade) == 0) {
@@ -182,10 +182,10 @@ Registro *registro_readcsv(FILE *csv) {
 
     // Espécie
     strcpy(registro->nEspecie,strsep(&linha_copy, ","));
-   
+
     // Alimento
     strcpy(registro->alimento,strsep(&linha_copy, ","));
-    
+
     // Configurações adicionais para o registro
     registro->removido = REGISTRO_REMOVIDO_FALSE;
     registro->encadeamento = 0;
@@ -207,7 +207,7 @@ Registro *registro_readcsv(FILE *csv) {
 
 
 void registro_print(Registro *registro){
-    
+
     printf("Nome: %s\n", registro->nome);
     printf("Especie: %s\n", registro->nEspecie);
 
@@ -215,9 +215,9 @@ void registro_print(Registro *registro){
         printf("Tipo: %s\n", registro->tipo);
     }
 
-   
+
     printf("Dieta: %s\n", registro->dieta);
-    
+
     if(strcmp(registro->habitat, "") != 0){
         printf("Lugar que habitava: %s\n", registro->habitat);
     }
@@ -229,7 +229,7 @@ void registro_print(Registro *registro){
         printf("Velocidade: %d %cm/h\n", registro->velocidade, registro->uniMedida);
     }
     printf("\n");
-    
+
 }
 void registro_busca_elemento(char *valor, int valorint, float valorf, Registro *registro) {
     if (valor != NULL && strcmp(registro->nome, valor) == 0) {
@@ -304,7 +304,7 @@ float registro_getTam(Registro *registro){
 }
 
 char registro_getUnimedida(Registro *registro){
-    // verifica a quantidade de paginas 
+    // verifica a quantidade de paginas
     return registro->uniMedida;
 }
 
@@ -360,7 +360,7 @@ void registro_setTam(Registro *registro, float tam){
 }
 
 void registro_setUnimedida(Registro *registro, char unidade){
-    // verifica a quantidade de paginas 
+    // verifica a quantidade de paginas
     registro->uniMedida = unidade;
 }
 
@@ -399,3 +399,53 @@ void registro_setRemovido(Registro *registro, bool removido){
 void registro_setEncadeamento(Registro *registro, int encadeamento) {
     registro->encadeamento = encadeamento;
 }
+
+Registro leitura(){
+
+    Registro registro;
+
+    char *populacao, *tamanho, *velocidade, *medidaVelocidade;
+
+    cria_registro();              // Inicializa um registro
+
+    // Aloca espaço para as variáveis que precisam ser manipuladas
+    populacao = calloc(10, sizeof(char));
+    tamanho = calloc(10, sizeof(char));
+    velocidade = calloc(10, sizeof(char));
+    medidaVelocidade = calloc(10, sizeof(char));
+
+
+    // Lê todos os campos do teclado
+    scan_quote_string(registro.nome);
+    scan_quote_string(registro.dieta);
+    scan_quote_string(registro.habitat);
+    scan_quote_string(populacao);
+    scan_quote_string(registro.tipo);
+    scan_quote_string(velocidade);
+    scan_quote_string(medidaVelocidade);
+    scan_quote_string(tamanho);
+    scan_quote_string(registro.nEspecie);
+    scan_quote_string(registro.alimento);
+
+    if(strcmp(populacao, "")==0)                    // Caso o campo seja nulo, atualiza o valor da variável para -1
+        registro.populacao = -1;
+    else registro.populacao = atoi(populacao);      // Caso contrário, a variável recebe o valor lido
+
+    if(strcmp(velocidade, "")==0)                   // Caso o campo seja nulo, atualiza o valor da variável para -1
+        registro.velocidade = -1;
+    else registro.velocidade = atoi(velocidade);    // Caso contrário, a variável recebe o valor lido
+
+    if(strcmp(medidaVelocidade, "")==0)            // Caso o campo seja nulo, atualiza o valor da variável para '$'
+        registro.uniMedida = '$';
+    else registro.uniMedida = medidaVelocidade[0];  // Caso contrário, a variável recebe o valor lido
+
+    if(strcmp(tamanho, "")==0)                      // Caso o campo seja nulo, atualiza o valor da variável para -1
+        registro.tamanho = -1;
+    else registro.tamanho = atof(tamanho);          // Caso contrário, a variável recebe o valor lido
+
+    registro.removido = '0';                        // Certifica que registro.removido = '0'
+
+    return registro;
+}
+
+

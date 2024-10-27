@@ -66,21 +66,21 @@ void scan_quote_string(char *str) {
 	}
 }
 
-/*  
+/*
     Converte o nome do dinossauro para long
 
     OBS:   retorna -1 se o primeiro caracter é '*'
 
     COMO FUNCIONA:
 
-        Para converter os nomes para long e garantir que nomes diferentes 
+        Para converter os nomes para long e garantir que nomes diferentes
         deem números diferentes interpretamos eles como números em base 6
 
         Um número L com n digitos dI em base 6 é escrito como:
 
             L = d0 * 6^0 + d1 * 6^1 + d2 * 6^2 + d3 * 6^3 + ... + dn * 6^n-1
 
-        Nota-se que estamos escrevendo do digito menos significativo para o 
+        Nota-se que estamos escrevendo do digito menos significativo para o
         mais significativo
 */
 long converteNome(char* str) {

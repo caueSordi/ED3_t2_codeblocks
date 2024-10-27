@@ -1,7 +1,7 @@
 
 #ifndef REGISTRO_H
     #define REGISTRO_H
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -34,7 +34,7 @@
         int tam_preenchimento;
 
     } Registro;
-    
+
     Registro* cria_registro();
 
     // Funções de leitura e escrita binária
@@ -67,7 +67,7 @@
     char* registro_getAlimenta(Registro *registro);
     char registro_getRemovido(Registro *registro);
     int registro_getEncadeamento(Registro *registro);
-    
+
     void registro_busca_elemento(char *valor, int valorint, float valorf, Registro *registro);
     // Funções para definir valores dos campos do registro
     void registro_setPop(Registro *registro, int pop);

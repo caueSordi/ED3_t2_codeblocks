@@ -82,11 +82,3 @@ void bcabecalho_setNoRaiz(CabecalhoArvore *cabecalho, int NoRaiz){
 void bcabecalho_setproxRRNno(CabecalhoArvore *cabecalho, int proxRRNno){
     cabecalho->proxRRNno = proxRRNno;
 }
-
-int verificar_cabecalho(CabecalhoArvore cabecalho){
-    if(CabecalhoArvore.status =='0'){
-        printf("cabecalho comprometido\n");
-        return -1;
-    }
-    return 0;
-}

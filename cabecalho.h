@@ -1,6 +1,6 @@
 #ifndef CABECALHO_H
     #define CABECALHO_H
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <stdbool.h>
