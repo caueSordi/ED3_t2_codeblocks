@@ -218,10 +218,25 @@ int inserir_registro_02(char *arquivo_binario, Registro registro) {
     if(topo == -1){
         rrn++;
         fseek(arquivo,0,SEEK_END);
+        escrever_registro(arquivo,registro, rrn);
+
+    }
+    else if(topo!= -1){
+
+        fseek(arquivo, 1600+160*topo, SEEK_SET);    // Posiciona o cursor no topo
+        registro_ = lerRegistro(arquivo, arquivo_binario);
+        rrn = topo;
+        topo = registro_->encadeamento;
+        if(registro2.removido == '1')                // Confirma que o registro havia sido removido
+        {
+            fseek(arquivo, -5, SEEK_CUR);         // move cursor
+            removidos--;
+        }
+        sub_registro(arquivo, registro);
 
     }
 
-    }
+
 
 
 
