@@ -90,6 +90,7 @@
     int arquivo_ok(FILE *arquivobin, char *arquivo);
     int escreve_registro(FILE *arquivonbin, Registro registro, int qtd_registro);
     int tamanhoString(char *string);
+    void sub_registro (FILE *arquivobin, Registro registro);
 
 
 

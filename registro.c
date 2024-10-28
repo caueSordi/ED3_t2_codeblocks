@@ -536,6 +536,80 @@ Registro ler_registro(FILE *arquivobin, char * arquivo){
         return reg_;
     }
 
+    if(reg_.removido == '1')
+    {
+        fread(&reg_.encadeamento,sizeof(int),1,arquivobin);
+        return reg_;
+    }
+
+    if( reg_.removido == '0')
+    {
+         {
+        fread(&reg_.encadeamento, sizeof(int),1,arquivobin);
+        fread(&reg_.populacao, sizeof(int),1,arquivobin);
+        fread(&reg_.tamanho, sizeof(float),1,arquivobin);
+        fread(&reg_.uniMedida, sizeof(char),1,arquivobin);
+        fread(&reg_.velocidade, sizeof(int), 1,arquivobin);
+
+        if(fread(data,sizeof(char),142, arquivobin)==0)
+        {
+            reg_.removido = '2';
+            return reg_;
+        }
+
+        linha - strdup(data);
+        reg_.nome = strsep(&linha , "#");
+        reg_.tipo = strsep(&linha, "#");
+        reg_.tamanho =strsep(&linha, "#")
+        reg_.nEspecie =strsep(&linha, "#");
+        reg_.habitat = strsep(&linha, "#");
+        reg_.dieta = strsep(&linha, "#");
+
+        return reg_;
+}}
+
+void sub_registro (FILE *arquivobin, Registro registro)
+{ char delim = '#';
+
+    // Escrevendo campos binários
+    fwrite(&registro.removido, sizeof(char), 1, arquivobin);
+    fwrite(&registro.encadeamento, sizeof(int), 1, arquivobin);
+    fwrite(&registro.populacao, sizeof(int), 1, arquivobin);
+    fwrite(&registro.tamanho, sizeof(float), 1, arquivobin);
+    fwrite(&registro.uniMedida, sizeof(char), 1, arquivobin);
+    fwrite(&registro.velocidade, sizeof(int), 1, arquivobin);
+
+    // Escrevendo strings e delimitadores
+    if (registro.nome) {
+        fwrite(registro.nome, sizeof(char), strlen(registro.nome), arquivobin);
+    }
+    fwrite(&delim, sizeof(char), 1, arquivobin);
+
+    if (registro.nEspecie) {
+        fwrite(registro.nEspecie, sizeof(char), strlen(registro.nEspecie), arquivobin);
+    }
+    fwrite(&delim, sizeof(char), 1, arquivobin);
+
+    if (registro.habitat) {
+        fwrite(registro.habitat, sizeof(char), strlen(registro.habitat), arquivobin);
+    }
+    fwrite(&delim, sizeof(char), 1, arquivobin);
+
+    if (registro.tipo) {
+        fwrite(registro.tipo, sizeof(char), strlen(registro.tipo), arquivobin);
+    }
+    fwrite(&delim, sizeof(char), 1, arquivobin);
+
+    if (registro.dieta) {
+        fwrite(registro.dieta, sizeof(char), strlen(registro.dieta), arquivobin);
+    }
+    fwrite(&delim, sizeof(char), 1, arquivobin);
+
+    if (registro.alimento) {
+        fwrite(registro.alimento, sizeof(char), strlen(registro.alimento), arquivobin);
+    }
+    fwrite(&delim, sizeof(char), 1, arquivobin);
+
 
 
 }

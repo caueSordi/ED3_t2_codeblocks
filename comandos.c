@@ -189,7 +189,7 @@ int SELECT_WHERE(char *nomearquivo, char *campo, int quant) {
 
 int inserir_registro_02(char *arquivo_binario, Registro registro) {
        int rrn, topo,removidos;
-
+    long int tamn;
        Registro registro_;
     FILE *arquivo;
     Cabecalho *cabecalho;
@@ -225,11 +225,11 @@ int inserir_registro_02(char *arquivo_binario, Registro registro) {
     }
     else if(topo!= -1){
 
-        fseek(arquivo, 1600+160*topo, SEEK_SET);    // Posiciona o cursor no topo
+        fseek(arquivo, 1600+160*topo, SEEK_SET);    // leva cursor topo
         registro_ = ler_registro(arquivo, arquivo_binario);
         rrn = topo;
-        topo = registro.encadeamento;
-        if(registro_.removido == '1')                // Confirma que o registro havia sido removido
+        topo = registro_.encadeamento;
+        if(registro_.removido == '1')                //confirma remocao
         {
             fseek(arquivo, -5, SEEK_CUR);         // move cursor
             removidos--;
@@ -238,29 +238,24 @@ int inserir_registro_02(char *arquivo_binario, Registro registro) {
 
     }
 
+    fseek(arquivo_binario,0, SEEK_END);
+    tamn = ftell(arquivo_binario);
+    float div = (float)tamn/16000;
 
+    if(div>(int)div)
+        (int)div++;
+    cabecalho.status = '1';
+    cabecalho.topo - topo;
+    cabecalho.proxRRN = rrn;
+    cabecalho.nroPagDisco =(int)div;
+    cabecalho.nroRegRem = removidos;
 
+    cabecalho_writebin(arquivo_binario,cabecalho);
+    fclose(arquivo_binario);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if(cabecalho.topo= -1)
+        return (rrn-1);
+    return rrn;
 
 
 
