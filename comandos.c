@@ -244,16 +244,16 @@ int inserir_registro_02(char *arquivo_binario, Registro registro) {
 
     if(div>(int)div)
         (int)div++;
-    cabecalho.status = '1';
-    cabecalho.topo - topo;
-    cabecalho.proxRRN = rrn;
-    cabecalho.nroPagDisco =(int)div;
-    cabecalho.nroRegRem = removidos;
+    cabecalho->status = '1';
+    cabecalho->topo - topo;
+    cabecalho->proxRRN = rrn;
+    cabecalho->nroPagDisco =(int)div;
+    cabecalho->nroRegRem = removidos;
 
     cabecalho_writebin(arquivo_binario,cabecalho);
     fclose(arquivo_binario);
 
-    if(cabecalho.topo= -1)
+    if(cabecalho->topo= -1)
         return (rrn-1);
     return rrn;
 
@@ -389,7 +389,7 @@ void INSERT_REGISTRO_ARVR(char *binario,char *indice)
 
     int n, i, retorno;
     int rrn;
-
+    NoPos resposta;
     char *chave;
 
 
@@ -410,6 +410,25 @@ void INSERT_REGISTRO_ARVR(char *binario,char *indice)
 
         Registro registro = leitura();
         rrn = inserir_registro_02( arquivo_binario, Registro registro);
+        resposta = (buscando_chave(arquivo_binario, converteNome(registro.nome)));
+
+        if(resposta.pos != -1) continue;
+
+        CPR info_cpr;
+        info_cpr.C - converteNome(registro.nome);
+        info_cpr.PR ( rrn*REGISTRO_SIZE)+ CABECALHO_SIZE;
+
+        if(resposta.posInsercao == -2)
+            Arvore_empty(arquivo_binario, info_cpr);
+        else
+        {
+
+            if(resposta.no.nroChavesNo >= CPR_SIZE)
+                Arvore_overflow;
+            else
+                arvore_wtlt_overflow;
+        }
+
 
     }
 
@@ -418,7 +437,7 @@ void INSERT_REGISTRO_ARVR(char *binario,char *indice)
 
 
 
-
+binarioNaTela(arquivo_binario);
 return rrn;
 }
 

@@ -318,3 +318,27 @@ int buscando_chave(FILE *arquivo_indice, NoArvore *atual, long int campo)
 }
 
 
+/*  if(resposta.posInsercao == -2)
+            Arvore_empty(arquivo_binario, info_cpr);
+        else
+        {
+
+            if(resposta.no.nroChavesNo >= CPR_SIZE)
+                Arvore_overflow;
+            else
+                arvore_wtlt_overflow;
+        }*/
+
+void Arvore_empty(char *arquivobin, CPR info_cpt){
+    Cabecalho cabecalho ;
+    int resultado;
+
+    NoArvore *no = no_criar(true);
+    no->nroChavesIndexadas =1;
+    no->CPRs[0].C = info_cpt.C;
+    no->CPRs[0].PR = info_cpt.PR;
+    no->RRNdoNo = 0;
+
+
+}
+

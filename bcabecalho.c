@@ -82,3 +82,23 @@ void bcabecalho_setNoRaiz(CabecalhoArvore *cabecalho, int NoRaiz){
 void bcabecalho_setproxRRNno(CabecalhoArvore *cabecalho, int proxRRNno){
     cabecalho->proxRRNno = proxRRNno;
 }
+
+
+    void ncabecalho_altera(char *arquivobin, char status, int noRaiz, int rrnProxNo){
+        FILE *arq = fopen( arquivobin, "rb+");
+        char c = '$';
+
+        if(arquivo_ok(arq, arquivobin) != -1) return -1;
+
+
+    fwrite(&status, sizeof(char), 1, arq);
+    fwrite(&noRaiz, sizeof(int), 1, arq);
+    fwrite(&rrnProxNo, sizeof(int), 1, arq);
+
+    for(int i = 0; i < 84; i++)
+        fwrite(&c, sizeof(char), 1, arq);
+
+    fclose(arq);
+    return 0;
+    }
+

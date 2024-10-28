@@ -23,6 +23,7 @@
     //void cabecalho_verificacao(CabecalhoArvore *cabecalho);
     void bcabecalho_writebin(FILE *file, CabecalhoArvore *cabecalho);
     void bcabecalho_readcsv(FILE *csv);
+    void ncabecalho_altera(char *nomeArq, char status, int noRaiz, int rrnProxNo);
 
     // Funções para obter valores dos campos do cabeçalho
     bool bcabecalho_getStatus(CabecalhoArvore *cabecalho);

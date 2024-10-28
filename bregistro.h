@@ -13,7 +13,7 @@
     #define REGISTRO_DELIMITADOR '#'
     #define MAXPAGE 93
     #define ORDEM 5
-
+    #define CPR_SIZE 4
     #define REGISTRO_REMOVIDO_TRUE '1'
     #define REGISTRO_REMOVIDO_FALSE '0'
 
@@ -36,6 +36,15 @@
         int lotacao;
     } NoArvore;
 
+
+typedef struct _noPos
+{
+    NoArvore no;        // No em que foi encontrado / deveria estar
+    NoArvore noAnt;     // No anterior para insercao com overflow
+    int pos;            // Posição i do no em que foi encontrado
+    int posInsercao;    // Posição i do no que deveria estar
+
+} NoPos;
     NoArvore *no_criar(bool folha);
     void no_print(NoArvore *no);
     NoArvore *no_readbin(FILE* entrada);
@@ -45,4 +54,7 @@
     PCPR no_inserir_recursivo(FILE *nomebin,NoArvore *atual,CPR valor_inserir, CabecalhoArvore *c,int level);
 
    int buscando_chave(FILE *arquivo_indice,NoArvore *atual, long int campo);
+   void Arvore_empty(char *arquivobin, CPR info_cpt);
+
 #endif
+

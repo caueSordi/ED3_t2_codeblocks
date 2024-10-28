@@ -560,7 +560,7 @@ Registro ler_registro(FILE *arquivobin, char * arquivo){
         linha - strdup(data);
         reg_.nome = strsep(&linha , "#");
         reg_.tipo = strsep(&linha, "#");
-        reg_.tamanho =strsep(&linha, "#")
+        reg_.tamanho =strsep(&linha, "#");
         reg_.nEspecie =strsep(&linha, "#");
         reg_.habitat = strsep(&linha, "#");
         reg_.dieta = strsep(&linha, "#");
@@ -611,5 +611,5 @@ void sub_registro (FILE *arquivobin, Registro registro)
     fwrite(&delim, sizeof(char), 1, arquivobin);
 
 
-
+    return 0;
 }

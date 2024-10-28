@@ -1,20 +1,20 @@
 # depslib dependency file v1.0
-1730042518 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/bcabecalho.c
+1730155995 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/bcabecalho.c
 	"bcabecalho.h"
 
-1730042526 /home/cauer/code/ed3/teste_codeblocks/teste_01/bcabecalho.h
+1730155981 /home/cauer/code/ed3/teste_codeblocks/teste_01/bcabecalho.h
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 
-1730042653 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/bregistro.c
+1730156199 source:/home/cauer/code/ed3/teste_codeblocks/teste_01/bregistro.c
 	"bregistro.h"
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	"registro.h"
 
-1730042541 /home/cauer/code/ed3/teste_codeblocks/teste_01/bregistro.h
+1730156310 /home/cauer/code/ed3/teste_codeblocks/teste_01/bregistro.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -40,7 +40,7 @@
 	"cabecalho.h"
 	"funcoesFornecidas.h"
 
-1730149372 /home/cauer/code/ed3/teste_codeblocks/teste_01/registro.h
+1730152115 /home/cauer/code/ed3/teste_codeblocks/teste_01/registro.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -69,7 +69,7 @@
 	"funcoesFornecidas.h"
 	"comandos.h"
 
-1729773822 /home/cauer/code/ed3/teste_codeblocks/teste_01/comandos.h
+1730155373 /home/cauer/code/ed3/teste_codeblocks/teste_01/comandos.h
 	"registro.h"
 	"cabecalho.h"
 	<stdio.h>

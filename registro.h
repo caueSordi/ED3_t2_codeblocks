@@ -35,6 +35,9 @@
 
     } Registro;
 
+
+
+
     Registro* cria_registro();
 
     // Funções de leitura e escrita binária
