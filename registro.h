@@ -83,4 +83,17 @@
     void registro_setRemovido(Registro *registro, bool removido);
     void registro_setEncadeamento(Registro *registro, int encadeamento);
 
+
+
+    Registro leitura();
+    Registro ler_registro(FILE *arquivobin, char *arquivo);
+    int arquivo_ok(FILE *arquivobin, char *arquivo);
+    int escreve_registro(FILE *arquivonbin, Registro registro, int qtd_registro);
+    int tamanhoString(char *string);
+
+
+
+
+
+
 #endif

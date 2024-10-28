@@ -189,9 +189,11 @@ int SELECT_WHERE(char *nomearquivo, char *campo, int quant) {
 
 int inserir_registro_02(char *arquivo_binario, Registro registro) {
        int rrn, topo,removidos;
+
+       Registro registro_;
     FILE *arquivo;
     Cabecalho *cabecalho;
-
+//ok
     // Abre o arquivo em modo leitura e escrita binária
     arquivo = fopen(arquivo_binario, "rb+");
     if (arquivo == NULL) {
@@ -214,7 +216,7 @@ int inserir_registro_02(char *arquivo_binario, Registro registro) {
 
     cabecalho->status = '0';
     cabecalho_writebin(arquivo, cabecalho);
-
+//ok
     if(topo == -1){
         rrn++;
         fseek(arquivo,0,SEEK_END);
@@ -224,10 +226,10 @@ int inserir_registro_02(char *arquivo_binario, Registro registro) {
     else if(topo!= -1){
 
         fseek(arquivo, 1600+160*topo, SEEK_SET);    // Posiciona o cursor no topo
-        registro_ = lerRegistro(arquivo, arquivo_binario);
+        registro_ = ler_registro(arquivo, arquivo_binario);
         rrn = topo;
-        topo = registro_->encadeamento;
-        if(registro2.removido == '1')                // Confirma que o registro havia sido removido
+        topo = registro.encadeamento;
+        if(registro_.removido == '1')                // Confirma que o registro havia sido removido
         {
             fseek(arquivo, -5, SEEK_CUR);         // move cursor
             removidos--;
@@ -411,8 +413,8 @@ void INSERT_REGISTRO_ARVR(char *binario,char *indice)
     for(i=0;i<n;i++) //quantos registros serao adicionados
     {
 
-        Registro *registro = leitura();
-        rrn = inserir_registro_02( arquivo_binario, Registro registro)
+        Registro registro = leitura();
+        rrn = inserir_registro_02( arquivo_binario, Registro registro);
 
     }
 
@@ -422,6 +424,6 @@ void INSERT_REGISTRO_ARVR(char *binario,char *indice)
 
 
 
-
+return rrn;
 }
 

@@ -448,4 +448,94 @@ Registro leitura(){
     return registro;
 }
 
+int tamanhoString(char *string)
+{
+    int i=0;
+    while(string[i]!='\0')
+        i++;
 
+    return i;
+}
+int escreve_registro(FILE *arquivonbin, Registro registro, int qtd_registro) {
+    long int psc_atual;
+    int psc_final;
+    char delimitador = '#';
+    int tamNome, tamEspecie, tamHabitat, tamTipo, tamDieta, tamAlimento;
+
+    if (arquivonbin == NULL) {
+        printf("Falha no processamento do arquivo [Arq. CSV == NULL]\n");
+        return -1;
+    }
+
+    // Calcula os tamanhos das strings
+    tamNome = tamanhoString(registro.nome);
+    tamEspecie = tamanhoString(registro.nEspecie);
+    tamHabitat = tamanhoString(registro.habitat);
+    tamTipo = tamanhoString(registro.tipo);
+    tamDieta = tamanhoString(registro.dieta);
+    tamAlimento = tamanhoString(registro.alimento);
+
+    // Escreve os campos binários no arquivo
+    fwrite(&registro.removido, sizeof(char), 1, arquivonbin);
+    fwrite(&registro.encadeamento, sizeof(int), 1, arquivonbin);
+    fwrite(&registro.populacao, sizeof(int), 1, arquivonbin);
+    fwrite(&registro.tamanho, sizeof(float), 1, arquivonbin);
+    fwrite(&registro.uniMedida, sizeof(char), 1, arquivonbin);
+    fwrite(&registro.velocidade, sizeof(int), 1, arquivonbin);
+
+    // Escreve as strings com os tamanhos calculados e delimitadores
+    fwrite(registro.nome, sizeof(char), tamNome, arquivonbin);
+    fwrite(&delimitador, sizeof(char), 1, arquivonbin);
+
+    fwrite(registro.nEspecie, sizeof(char), tamEspecie, arquivonbin);
+    fwrite(&delimitador, sizeof(char), 1, arquivonbin);
+
+    fwrite(registro.habitat, sizeof(char), tamHabitat, arquivonbin);
+    fwrite(&delimitador, sizeof(char), 1, arquivonbin);
+
+    fwrite(registro.tipo, sizeof(char), tamTipo, arquivonbin);
+    fwrite(&delimitador, sizeof(char), 1, arquivonbin);
+
+    fwrite(registro.dieta, sizeof(char), tamDieta, arquivonbin);
+    fwrite(&delimitador, sizeof(char), 1, arquivonbin);
+
+    fwrite(registro.alimento, sizeof(char), tamAlimento, arquivonbin);
+    fwrite(&delimitador, sizeof(char), 1, arquivonbin);
+
+    // ve a posicao
+    psc_atual = ftell(arquivonbin);
+    psc_final = 1600 + (qtd_registro * 160);
+
+    // $$$$$ ate completar
+    for (int i = psc_atual; i < psc_final; i++) {
+        fwrite("$", sizeof(char), 1, arquivonbin);
+    }
+
+    return 0;  // Sucesso
+}
+int arquivo_ok(FILE *arquivobin, char *arquivo)
+{
+    if(arquivobin == NULL)
+    {
+        printf("Foi impossível de abrir o arquivo: %s\n", arquivo);
+        return -1;
+    }
+
+    return 0;
+}
+
+Registro ler_registro(FILE *arquivobin, char * arquivo){
+    Registro reg_;
+    char data[142] /*por que este tamanho??*/, *linha;
+
+    if(arquivo_ok(arquivobin, arquivo) <0)
+        return reg_;
+
+    if(fread(&reg_.removido,sizeof(char),1,arquivobin)==0){
+        reg_.removido = '2';
+        return reg_;
+    }
+
+
+
+}
