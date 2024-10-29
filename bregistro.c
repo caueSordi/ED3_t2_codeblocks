@@ -328,7 +328,34 @@ int buscando_chave(FILE *arquivo_indice, NoArvore *atual, long int campo)
             else
                 arvore_wtlt_overflow;
         }*/
+NoArvore Cria_no()
+{
+NoArvore novo;
+int i;
 
+novo.folha ='1';
+novo.nroChavesIndexadas = 0;
+novo.RRNdoNo = -1;
+
+novo.P[0] = calloc (ORDEM, sizeof(int));
+
+memset(novo.CPRs, 0, sizeof(novo.CPRs));
+
+for (i = 0 ; i < CPR_SIZE ; i++){
+
+
+    novo.P[i] = -1;
+    novo.CPRs[i].C = -1;
+    novo.CPRs[i].PR = -1;
+
+}
+
+novo.P[i] = -1;
+
+return novo;
+
+
+}
 void Arvore_empty(char *arquivobin, CPR info_cpt){
     Cabecalho cabecalho ;
     int resultado;
@@ -341,4 +368,97 @@ void Arvore_empty(char *arquivobin, CPR info_cpt){
 
 
 }
+
+int Arvore_overflow(char *arquivobin, NoPos resposta, Registro registro, int noDireita){
+      CabecalhoArvore *cabecalho = bcabecalho_inicializa();
+    NoArvore no_left = Cria_no();  // Cria nó à esquerda
+    NoArvore no_right = Cria_no();   // Cria nó à direita
+    CPR info_promovida;            // Informação promovida da divisão
+
+    CPR info_ORDEM[5];             // Array para manter informações ordenadas
+    int posicao_ordem[6];          // Ponteiros ordenados
+    int i;
+
+    cabecalho = bcabecalho_readbin(arquivobin);   // Lê o cabeçalho do arquivo
+
+    posicao_ordem[0] = resposta.no.P[0];  // O primeiro ponteiro não é alterado
+
+    // Copia as informações anteriores à posição de inserção
+    for (i = 0; i < resposta.posInsercao; i++) {
+        info_ORDEM[i] = resposta.no.lotacao[i];
+        posicao_ordem[i + 1] = resposta.no.P[i + 1];
+    }
+
+    // Adiciona nova informação e referência ao nó à direita
+    info_ORDEM[resposta.posInsercao] = info_cpt;
+    posicao_ordem[resposta.posInsercao + 1] = no_right;
+
+    // Adiciona informações deslocadas após a inserção
+    for (i = 4; i > resposta.posInsercao; i--) {
+        info_ORDEM[i] = resposta.no.lotacao[i - 1];
+        posicao_ordem[i + 1] = resposta.no.P[i];
+    }
+
+    /////////////////////////////////////////
+    // Divisão: informações para no_left e no_right
+
+    no_left.lotacao[0] = info_ORDEM[0];
+    no_left.lotacao[1] = info_ORDEM[1];
+    no_left.P[0] = posicao_ordem[0];
+    no_left.P[1] = posicao_ordem[1];
+    no_left.P[2] = posicao_ordem[2];
+    no_left.nroChavesNo = 2;
+    no_left.folha = resposta.no.folha;
+    no_left.RRNdoNo = resposta.no.RRNdoNo;
+
+    no_dir.lotacao[0] = info_ORDEM[3];
+    no_dir.lotacao[1] = info_ORDEM[4];
+    no_dir.P[0] = posicao_ordem[3];
+    no_dir.P[1] = posicao_ordem[4];
+    no_dir.P[2] = posicao_ordem[5];
+    no_dir.nroChavesNo = 2;
+    no_dir.folha = resposta.no.folha;
+    no_dir.RRNdoNo = cabecalho->RRNproxNo++;
+
+    // Escreve os nós no arquivo
+    bno_escreve(nomeArqArvore, no_left, no_left.RRNdoNo);
+    bno_escreve(nomeArqArvore, no_dir, no_dir.RRNdoNo);
+
+    /////////////////////////////////////////
+    // Promoção de informação
+
+    info_promovida = info_ORDEM[2];
+
+    if (resposta.noAnt.RRNdoNo == -1) {
+        // Caso o overflow ocorra na raiz
+        NoArvore no_raiz = Cria_no();  // Cria nova raiz
+
+        no_raiz.RRNdoNo = cabecalho->RRNproxNo++;
+        no_raiz.folha = '0';  // A raiz não é uma folha
+        no_raiz.nroChavesIndexadas = 1;
+        no_raiz.lotacao[0] = info_promovida;
+        no_raiz.P[0] = no_left.RRNdoNo;
+        no_raiz.P[1] = no_dir.RRNdoNo;
+
+        bno_escreve(nomeArqArvore, no_raiz, no_raiz.RRNdoNo);
+        bcabecalho_altera(nomeArqArvore, '1', no_raiz.RRNdoNo, cabecalho->RRNproxNo);
+        return 0;
+    } else if (resposta.noAnt.nroChavesNo < TAMANHO_CPR) {
+        // Nó anterior sem overflow
+        int posicao = EncontraPosicao(resposta.noAnt, info_promovida);
+        InserirNoSemOverflow(nomeArqArvore, resposta.noAnt, no_dir.RRNdoNo, posicao, info_promovida);
+        bcabecalho_altera(nomeArqArvore, '1', cabecalho->noRaiz, cabecalho->RRNproxNo);
+    } else {
+        // Nó anterior com overflow
+        resposta = BuscarNoArvore(nomeArqArvore, resposta.noAnt.lotacao[0].C);
+        resposta.posInsercao = EncontraPosicao(resposta.no, info_promovida);
+        resposta.pos = -1;  // Recursão para tratar novo overflow
+        bcabecalho_altera(nomeArqArvore, '1', cabecalho->noRaiz, cabecalho->RRNproxNo);
+        InserirNoComOverflow(nomeArqArvore, resposta, info_promovida, no_dir.RRNdoNo);
+    }
+
+    return 0;
+}
+
+
 

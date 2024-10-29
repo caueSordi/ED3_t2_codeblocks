@@ -560,7 +560,8 @@ Registro ler_registro(FILE *arquivobin, char * arquivo){
         linha - strdup(data);
         reg_.nome = strsep(&linha , "#");
         reg_.tipo = strsep(&linha, "#");
-        reg_.tamanho =strsep(&linha, "#");
+        reg_.tamanho = atoi(strsep(&linha, "#"));
+
         reg_.nEspecie =strsep(&linha, "#");
         reg_.habitat = strsep(&linha, "#");
         reg_.dieta = strsep(&linha, "#");

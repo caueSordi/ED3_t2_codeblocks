@@ -17,7 +17,7 @@
     #define REGISTRO_REMOVIDO_TRUE '1'
     #define REGISTRO_REMOVIDO_FALSE '0'
 
-    typedef struct CPR{
+    typedef struct struct_cpr{
         long int C;
         long int PR;
     } CPR;
